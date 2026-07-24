@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Documentation Assistant</title>
+
+    <link rel="stylesheet" href="{% static 'chatbot/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Django Documentation Assistant</h1>
+
+    <div class="chat-box">
+
+        {% if question %}
+            <div class="message user">
+                <strong>You</strong>
+                <p>{{ question }}</p>
+            </div>
+        {% endif %}
+
+        {% if answer %}
+            <div class="message assistant">
+                <strong>Assistant</strong>
+                {{ answer|safe }}
+            </div>
+        {% endif %}
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="question"
+            placeholder="Ask something about Django..."
+            required
+        >
+
+        <button type="submit">
+            Send
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
